@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { GridForm, ColOne, ColTwo, Button, Error } from './Styled'
+import { IfAuthenticated } from './Authenticated'
 
 import {
   getFruits,
@@ -118,35 +119,39 @@ function Fruits () {
           value={editingCalories || ''}
           onChange={handleEditChange} />
 
-        <Button type='button'
-          data-testid='update-button'
-          onClick={handleUpdate}>Update fruit</Button>
-        <Button type='button'
-          data-testid='delete-button'
-          onClick={handleDelete}>Delete fruit</Button>
+        <IfAuthenticated>
+          <Button type='button'
+            data-testid='update-button'
+            onClick={handleUpdate}>Update fruit</Button>
+          <Button type='button'
+            data-testid='delete-button'
+            onClick={handleDelete}>Delete fruit</Button>
+        </IfAuthenticated>
         <Button type='button'
           data-testid='clear-button'
           onClick={clearSelected}>Clear selection</Button>
       </GridForm>
 
-      <h2>Add new</h2>
-      <GridForm>
-        <ColOne>Name:</ColOne>
-        <ColTwo type='text'
-          name='name'
-          aria-label='adding-name'
-          value={addingName || ''}
-          onChange={handleAddChange} />
+      <IfAuthenticated>
+        <h2>Add new</h2>
+        <GridForm>
+          <ColOne>Name:</ColOne>
+          <ColTwo type='text'
+            name='name'
+            aria-label='adding-name'
+            value={addingName || ''}
+            onChange={handleAddChange} />
 
-        <ColOne>Calories:</ColOne>
-        <ColTwo type='text'
-          name='calories'
-          aria-label='adding-calories'
-          value={addingCalories || ''}
-          onChange={handleAddChange} />
+          <ColOne>Calories:</ColOne>
+          <ColTwo type='text'
+            name='calories'
+            aria-label='adding-calories'
+            value={addingCalories || ''}
+            onChange={handleAddChange} />
 
-        <Button type='button' onClick={handleAdd}>Add fruit</Button>
-      </GridForm>
+          <Button type='button' onClick={handleAdd}>Add fruit</Button>
+        </GridForm>
+      </IfAuthenticated>
     </>
   )
 }

@@ -1,7 +1,5 @@
 const connection = require('./connection')
-
-// TODO: implement or import a proper generateHash function
-const generateHash = () => 'fake-hash-value'
+const { generateHash } = require('authenticare/server')
 
 module.exports = {
   createUser,

@@ -1,11 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { logOff } from 'authenticare/client'
 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
-
-// TODO: implement or import a proper logOff function
-const logOff = () => {}
 
 const NavGroup = styled.nav`
   float: right;

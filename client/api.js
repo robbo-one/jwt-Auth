@@ -1,7 +1,5 @@
 import request from 'superagent'
-
-// TODO: implement or import a proper getAuthorizationHeader function
-const getAuthorizationHeader = () => ({ Authorization: 'Bearer encoded-token' })
+import { getAuthorizationHeader } from 'authenticare/client'
 
 const rootUrl = '/api/v1/fruits'
 const acceptJsonHeader = { Accept: 'application/json' }
