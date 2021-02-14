@@ -21,11 +21,12 @@ function Register (props) {
 
   function handleClick (evt) {
     evt.preventDefault()
-    register({username: form.username, password: form.password, options: baseUrl})
+    console.log(baseUrl)
+    const { username, password } = form
+    register({username, password}, {baseUrl})
       .then(() => {
-        if(isAuthenticated()){
-          <Redirect to="/" />
-          // props.history.push('/')
+        if (isAuthenticated()) {
+          props.history.push('/')
         }
       })
   }
