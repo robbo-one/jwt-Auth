@@ -18,6 +18,14 @@ function Register (props) {
   }
 
   function handleClick () {
+    e.preventDefault()
+    const { username, password } = form
+    register({ username, password, baseUrl })
+      .then(() => {
+        if (isAuthenticated()) {
+          props.history.push('/')
+        }
+      })
   }
 
   return (
