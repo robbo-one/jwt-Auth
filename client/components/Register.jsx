@@ -23,7 +23,7 @@ function Register (props) {
     e.preventDefault()
     console.log('in click handler')
     const { username, password } = form
-    register({ username, password}, { baseUrl })
+    register({ username, password}, { baseUrl: baseUrl })
       .then(() => {
         if(isAuthenticated()) {
           console.log('authenticated')
