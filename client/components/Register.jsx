@@ -4,7 +4,7 @@ import { register, isAuthenticated } from 'authenticare/client'
 import { baseApiUrl as baseUrl } from '../config'
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
-function Register (props, baseUrl) {
+function Register (props) {
   const [form, setForm] = useState({
     username: '',
     password: ''
@@ -21,10 +21,10 @@ function Register (props, baseUrl) {
   function handleClick (e) {
     e.preventDefault()
     const {username, password } = form
-    register({ username, password })
+    register({ username, password },{baseUrl})
     .then(() => {
       if(isAuthenticated()) {
-        props.baseUrl.push('/')
+        props.history.push('/')
       }
     })
   }
