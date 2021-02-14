@@ -1,5 +1,4 @@
-import { register } from 'authenticare/client'
-import { isAuthenticated } from 'authenticare/client'
+import { isAuthenticated, register } from 'authenticare/client'
 import React, { useState } from 'react'
 
 import { baseApiUrl as baseUrl } from '../config'
