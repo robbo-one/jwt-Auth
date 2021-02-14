@@ -24,8 +24,8 @@ function Register (props) {
     register({username: form.username, password: form.password, options: baseUrl})
       .then(() => {
         if(isAuthenticated()){
-          // <Redirect to="/" />
-          props.history.push('/')
+          <Redirect to="/" />
+          // props.history.push('/')
         }
       })
   }
