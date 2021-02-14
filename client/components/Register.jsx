@@ -1,47 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import { register, isAuthenticated } from "authenticare/client";
 
-import { baseApiUrl as baseUrl } from '../config'
-import { GridForm, ColOne, ColTwo, Button } from './Styled'
+import { baseApiUrl as baseUrl } from "../config";
+import { GridForm, ColOne, ColTwo, Button } from "./Styled";
 
-function Register (props) {
+function Register(props) {
   const [form, setForm] = useState({
-    username: '',
-    password: ''
-  })
+    username: "",
+    password: "",
+  });
 
-  function handleChange (e) {
-    const { name, value } = e.target
+  function handleChange(e) {
+    const { name, value } = e.target;
     setForm({
       ...form,
-      [name]: value
-    })
+      [name]: value,
+    });
   }
 
-  function handleClick () {
+  //takes user name and password + base url defined in config file. goes to back end, adds to users database + issues token?
+  function handleClick(e) {
+    e.preventDefault();
+    const { username, password } = form;
+    register({ username, password }, { baseUrl }).then(() => {
+      if (isAuthenticated()) {
+        props.history.push("/");
+      }
+    });
   }
 
   return (
     <>
       <h2>Register</h2>
       <GridForm>
-        <ColOne htmlFor='username'>Username:</ColOne>
-        <ColTwo type='text'
-          id='username'
-          name='username'
+        <ColOne htmlFor="username">Username:</ColOne>
+        <ColTwo
+          type="text"
+          id="username"
+          name="username"
           value={form.username}
-          onChange={handleChange} />
+          onChange={handleChange}
+        />
 
-        <ColOne htmlFor='password'>Password:</ColOne>
-        <ColTwo type='password'
-          id='password'
-          name='password'
+        <ColOne htmlFor="password">Password:</ColOne>
+        <ColTwo
+          type="password"
+          id="password"
+          name="password"
           value={form.password}
-          onChange={handleChange} />
+          onChange={handleChange}
+        />
 
-        <Button type='button' onClick={handleClick}>Register</Button>
+        <Button type="button" onClick={handleClick}>
+          Register
+        </Button>
       </GridForm>
     </>
-  )
+  );
 }
 
-export default Register
+export default Register;
