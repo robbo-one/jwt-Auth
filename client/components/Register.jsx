@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-
+import { isAuthenticated, register } from 'authenticare/client' 
 import { baseApiUrl as baseUrl } from '../config'
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
+import { Redirect } from 'react-router-dom'
+
 
 function Register (props) {
   const [form, setForm] = useState({
@@ -17,7 +19,17 @@ function Register (props) {
     })
   }
 
-  function handleClick () {
+  function handleClick (e) {
+    e.preventDefault()
+    console.log('in click handler')
+    const { username, password } = form
+    register({ username, password}, { baseUrl })
+      .then(() => {
+        if(isAuthenticated()) {
+          console.log('authenticated')
+          this.props.history.push('/')
+        } 
+      })
   }
 
   return (
