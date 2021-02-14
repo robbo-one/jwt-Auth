@@ -1,3 +1,4 @@
+// const { where } = require('./connection')
 const connection = require('./connection')
 
 module.exports = {
@@ -24,4 +25,5 @@ function getUserByName (username, db = connection) {
 
 function createUser (user, db = connection) {
   // you'll need to write this one
+  return 
 }
