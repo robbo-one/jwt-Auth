@@ -1,3 +1,5 @@
+import { register } from 'authenticare/client'
+import { isAuthenticated } from 'authenticare/client'
 import React, { useState } from 'react'
 
 import { baseApiUrl as baseUrl } from '../config'
@@ -17,7 +19,15 @@ function Register (props) {
     })
   }
 
-  function handleClick () {
+  function handleClick (e) {
+    e.preventDefault()
+    const { username, password } = form
+    register({ username, password }, { baseUrl: baseUrl })
+      .then(() => {
+        if (isAuthenticated()) {
+          props.history.push('/')
+        }
+      })
   }
 
   return (
