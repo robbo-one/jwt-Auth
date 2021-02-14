@@ -61,3 +61,7 @@ router.delete('/:id', async (req, res) => {
     res.status(500).send(err.message)
   }
 })
+
+//POST route for /auth/register
+
+//POST rout for /auth/signin
