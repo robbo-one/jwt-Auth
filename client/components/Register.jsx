@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 
 import { baseApiUrl as baseUrl } from '../config'
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
+import { register, isAuthenticated } from 'authenticare/client'
+import { Redirect } from 'react-router-dom'
 
 function Register (props) {
   const [form, setForm] = useState({
@@ -17,7 +19,15 @@ function Register (props) {
     })
   }
 
-  function handleClick () {
+  function handleClick (evt) {
+    evt.preventDefault()
+    register({username: form.username, password: form.password, options: baseUrl})
+      .then(() => {
+        if(isAuthenticated()){
+          // <Redirect to="/" />
+          props.history.push('/')
+        }
+      })
   }
 
   return (
