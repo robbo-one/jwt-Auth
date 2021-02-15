@@ -30,7 +30,7 @@ router.post('/', getTokenDecoder(), async (req, res) => {
   }
 
   try {
-    const fruits = await db.addFruit(newFruit, user)
+    const fruits = await db.addFruit(newFruit, req.user)
     res.json({ fruits })
   } catch (err) {
     res.status(500).send(err.message)
@@ -50,7 +50,7 @@ router.put('/', getTokenDecoder(), async (req, res) => {
   }
 
   try {
-    const fruits = await db.updateFruit(newFruit, user)
+    const fruits = await db.updateFruit(newFruit, req.user)
     res.json({ fruits })
   } catch (err) {
     if (err.message === 'Unauthorized') {
@@ -75,7 +75,7 @@ router.delete('/:id', getTokenDecoder(), async (req, res) => {
   }
 
   try {
-    const fruits = await db.deleteFruit(id, user)
+    const fruits = await db.deleteFruit(id, req.user)
     res.json({ fruits })
   } catch (err) {
     if (err.message === 'Unauthorized') {
