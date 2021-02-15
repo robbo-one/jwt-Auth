@@ -18,12 +18,13 @@ function Register(props) {
     });
   }
 
-  //takes user name and password + base url defined in config file. goes to back end, adds to users database + issues token?
+  //takes user name and password + base url defined in config file. goes to back end, adds to users database + issues token which means they are authenticated?
   function handleClick(e) {
     e.preventDefault();
     const { username, password } = form;
     register({ username, password }, { baseUrl }).then(() => {
       if (isAuthenticated()) {
+        //promise that resolves to the decoded token
         props.history.push("/");
       }
     });
