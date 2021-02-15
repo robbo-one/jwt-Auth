@@ -1,5 +1,7 @@
-// const { where } = require('./connection')
+
 const connection = require('./connection')
+const { applyAuthRoutes } = require('authenticare/server')
+const { generateHash } = require('authenticare/server')
 
 module.exports = {
   userExists,
@@ -25,5 +27,15 @@ function getUserByName (username, db = connection) {
 
 function createUser (user, db = connection) {
   // you'll need to write this one
-  return 
+  return userExists(user.username, db)
+    .then(exists => {
+      if (exists === true) {
+        return Promise.reject(new Error('User exists'))
+      }
+    })
+    .then(() => generateHash(user.password))
+    .then(passwordHash => {
+      return db('users').insert({ username, hash: passwordHash })
+    })
+  
 }
