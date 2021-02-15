@@ -72,6 +72,7 @@ function Fruits () {
           Add a Fruit
         </a>
       )}
+      </IfAuthenticated>
 
       {selected && <SelectedFruit
         selected={selected}
@@ -79,7 +80,6 @@ function Fruits () {
         setError={setError}
         setFruits={setFruits}
       />}
-      </IfAuthenticated>
     </>
   )
 }
