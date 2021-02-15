@@ -19,14 +19,6 @@ function userExists(username, db = connection) {
 function getUserByName(username, db = connection) {
   return db("users").select().where("username", username).first();
 }
-
-const connection = require("./connection");
-const { generateHash } = require("authenticare/server");
-
-module.exports = {
-  createUser,
-};
-
 function createUser(user, db = connection) {
   const { username, password } = user;
   return userExists(username, db)
@@ -40,3 +32,4 @@ function createUser(user, db = connection) {
       return db("users").insert({ username, hash: passwordHash });
     });
 }
+

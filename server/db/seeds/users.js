@@ -1,10 +1,12 @@
 // TODO: import a generateHash function
 
+const { generateHash } = require("authenticare/server")
+
 exports.seed = (knex) => {
   return knex('users').del()
     .then(() => Promise.all([
-      // generateHash('jess'),
-      // generateHash('jules')
+      generateHash('jess'),
+      generateHash('jules')
     ]))
     .then(([jessHash, julesHash]) =>
       knex('users').insert([
