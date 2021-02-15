@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { baseApiUrl as baseUrl } from '../config'
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
+import { signIn, isAuthenticated } from 'authenticare/client'
 
 function SignIn (props) {
   const [form, setForm] = useState({
@@ -17,7 +18,15 @@ function SignIn (props) {
     })
   }
 
-  function handleClick () {
+  function handleClick (e) {
+    e.preventDefault()
+    const { username, password } = form
+    signIn({ username, password }, { baseUrl })
+      .then(() => {
+        if (isAuthenticated()) {
+          props.history.push('/')
+        }
+      })
   }
 
   return (
