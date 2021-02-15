@@ -1,4 +1,5 @@
-const express = require('express')
+const { getTokenDecoder } = require('authenticare/server')
+ const express = require('express')
 
 const db = require('../db/fruits')
 
@@ -17,7 +18,8 @@ router.get('/', async (req, res) => {
 })
 
 // POST /api/v1/fruits
-router.post('/', async (req, res) => {
+router.post('/', getTokenDecoder(),  async (req, res) => {
+  console.log(req.user)
   const newFruit = req.body
   const user = { id: 1 }
   try {
@@ -29,7 +31,8 @@ router.post('/', async (req, res) => {
 })
 
 // PUT /api/v1/fruits
-router.put('/', async (req, res) => {
+router.put('/', getTokenDecoder(), async (req, res) => {
+  console.log(req.user)
   const newFruit = req.body
   const user = { id: 1 }
   try {
