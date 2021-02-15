@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 // POST /api/v1/fruits
 router.post('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
-  // const user = { id: 1 }
+  const user = req.user
   if (req.user) {
     console.log('username:', req.user.username)
   } else {
@@ -27,7 +27,7 @@ router.post('/', getTokenDecoder(), async (req, res) => {
   }
 
   try {
-    const fruits = await db.addFruit(newFruit)
+    const fruits = await db.addFruit(newFruit, user)
     res.json({ fruits })
   } catch (err) {
     res.status(500).send(err.message)
@@ -37,7 +37,7 @@ router.post('/', getTokenDecoder(), async (req, res) => {
 // PUT /api/v1/fruits
 router.put('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
-  // const user = { id: 1 }
+  const user = req.user
   if (req.user) {
     console.log('username:', req.user.username)
   } else {
@@ -45,7 +45,7 @@ router.put('/', getTokenDecoder(), async (req, res) => {
   }
 
   try {
-    const fruits = await db.updateFruit(newFruit)
+    const fruits = await db.updateFruit(newFruit, user)
     res.json({ fruits })
   } catch (err) {
     if (err.message === 'Unauthorized') {
@@ -60,8 +60,8 @@ router.put('/', getTokenDecoder(), async (req, res) => {
 // DELETE /api/v1/fruits
 router.delete('/:id', getTokenDecoder(), async (req, res) => {
   const id = Number(req.params.id)
-  // const user = { id: 1 }
-  if (req.user) {
+  const user = req.user
+  if (user) {
     console.log('username:', req.user.username)
   } else {
     console.log('authenication token not provided')
