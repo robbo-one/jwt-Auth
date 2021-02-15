@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 
 const fruitRoutes = require("./routes/fruits");
+const authRoutes = require("./routes/auth");
 
 const server = express();
 
