@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import { isAuthenticated, register } from 'authenticare/client'
 import { baseApiUrl as baseUrl } from '../config'
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
@@ -17,8 +17,16 @@ function Register (props) {
     })
   }
 
-  function handleClick () {
-  }
+  function handleClick (e) {
+      e.preventDefault()
+      const { username, password } = form
+      register({ username, password},{baseUrl})
+        .then(() => {
+          if (isAuthenticated()) {
+            props.history.push('/')
+          }
+        })
+    }
 
   return (
     <>
