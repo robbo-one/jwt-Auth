@@ -23,7 +23,7 @@ function Register (props) {
     const { username, password } = form
     register({ username, password },{baseUrl})
       .then(() => {
-        if (isAuthenticated(True)) {
+        if (isAuthenticated(true)) {
           props.history.push('/')
         }
       })
