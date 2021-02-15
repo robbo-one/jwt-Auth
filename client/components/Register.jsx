@@ -27,7 +27,7 @@ function Register (props) {
       .then(() => {
         if(isAuthenticated()) {
           console.log('authenticated')
-          this.props.history.push('/')
+          props.history.push('/')
         } 
       })
   }
