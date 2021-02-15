@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 // POST /api/v1/fruits
 router.post('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
-  const user = { id: 1 }
+  const user = req.user
   try {
     const fruits = await db.addFruit(newFruit, user)
     res.json({ fruits })
