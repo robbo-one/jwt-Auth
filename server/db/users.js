@@ -1,6 +1,5 @@
 
 const connection = require('./connection')
-const { applyAuthRoutes } = require('authenticare/server')
 const { generateHash } = require('authenticare/server')
 
 module.exports = {
@@ -35,7 +34,7 @@ function createUser (user, db = connection) {
     })
     .then(() => generateHash(user.password))
     .then(passwordHash => {
-      return db('users').insert({ username, hash: passwordHash })
+      return db('users').insert({ username: user.username, hash: passwordHash })
     })
   
 }

@@ -1,5 +1,5 @@
 // TODO: import a generateHash function
-import {generateHash} from ".authenticare/server"
+const { generateHash } = require('authenticare/server')
 
 exports.seed = (knex) => {
   return knex('users').del()

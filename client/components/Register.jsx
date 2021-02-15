@@ -21,7 +21,7 @@ function Register (props) {
   function handleClick (e) {
     e.preventDefault();
     const { username, password } = form;
-    register({ username, password })
+    register({ username, password }, {baseUrl})
       .then(() => {
         if (isAuthenticated()) {
           props.history.push("/");
