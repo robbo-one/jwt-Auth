@@ -4,6 +4,8 @@ import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
 import { updateFruit, deleteFruit } from '../api'
 
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+
 function SelectedFruit ({ selected, clearSelected, setError, setFruits }) {
   const [editing, setEditing] = useState(selected)
 
@@ -57,12 +59,15 @@ function SelectedFruit ({ selected, clearSelected, setError, setFruits }) {
           value={editingCalories || ''}
           onChange={handleEditChange} />
 
+          <IfAuthenticated>
         <Button type='button'
           data-testid='update-button'
           onClick={handleUpdate}>Update fruit</Button>
         <Button type='button'
           data-testid='delete-button'
           onClick={handleDelete}>Delete fruit</Button>
+          </IfAuthenticated>
+
         <Button type='button'
           data-testid='clear-button'
           onClick={clearSelected}>Clear selection</Button>
