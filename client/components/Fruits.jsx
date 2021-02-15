@@ -4,6 +4,8 @@ import SelectedFruit from './SelectedFruit'
 import AddFruit from './AddFruit'
 import { Error } from './Styled'
 
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+
 import { getFruits } from '../api'
 
 function Fruits () {
@@ -42,6 +44,7 @@ function Fruits () {
 
   return (
     <>
+    <IfAuthenticated>
       <Error onClick={hideError}>
         { error && `Error: ${error}` }
       </Error>
@@ -77,6 +80,7 @@ function Fruits () {
         setError={setError}
         setFruits={setFruits}
       />}
+      </IfAuthenticated>
     </>
   )
 }

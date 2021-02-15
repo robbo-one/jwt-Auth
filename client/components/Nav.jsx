@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { logOff } from 'authenticare/client'
 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
@@ -11,23 +12,24 @@ const NavGroup = styled.nav`
 const NavLink = styled(Link)`
   margin-right: 30px;
 `
-
-function Nav () {
+export default function Nav () {
   return (
     <>
-      <NavGroup>
-        <NavLink to='/'>Home</NavLink>
+      <div>
+        <Link to='/'>Home</Link>
+        <br/>
         <IfAuthenticated>
-          <NavLink to='#'>Log off</NavLink>
+          <Link to='#' onClick={logOff}>Log off</Link>
+          <br/>
         </IfAuthenticated>
         <IfNotAuthenticated>
-          <NavLink to='/register'>Register</NavLink>
-          <NavLink to='/signin'>Sign in</NavLink>
+          <Link to='/register'>Register</Link>
+          <br/>
+          <Link to='/signin'>Sign in</Link>
+          <br/>
         </IfNotAuthenticated>
-      </NavGroup>
+      </div>
       <h1>Fruit FTW!</h1>
     </>
   )
 }
-
-export default Nav
