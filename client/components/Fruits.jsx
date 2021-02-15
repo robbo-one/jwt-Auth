@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import SelectedFruit from './SelectedFruit'
 import AddFruit from './AddFruit'
 import { Error } from './Styled'
+import {IfAuthenticated, IfNotAuthenticated} from './Authenticated'
 
 import { getFruits } from '../api'
 
@@ -58,18 +59,19 @@ function Fruits () {
           </li>
         ))}
       </ul>
-
+      <IfAuthenticated>
       {adding ? (
         <AddFruit
-          setError={setError}
-          setFruits={setFruits}
-          closeAddForm={closeAddForm}
+        setError={setError}
+        setFruits={setFruits}
+        closeAddForm={closeAddForm}
         />
-      ) : (
-        <a href='#' onClick={openAddForm}>
+        ) : (
+          <a href='#' onClick={openAddForm}>
           Add a Fruit
         </a>
       )}
+      </IfAuthenticated>
 
       {selected && <SelectedFruit
         selected={selected}
