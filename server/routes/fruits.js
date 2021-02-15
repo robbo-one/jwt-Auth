@@ -1,5 +1,5 @@
 const express = require('express')
-
+const { getTokenDecoder } = require('authenticare/server')
 const db = require('../db/fruits')
 
 const router = express.Router()
@@ -17,11 +17,17 @@ router.get('/', async (req, res) => {
 })
 
 // POST /api/v1/fruits
-router.post('/', async (req, res) => {
+router.post('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
-  const user = { id: 1 }
+  // const user = { id: 1 }
+  if (req.user) {
+    console.log('username:', req.user.username)
+  } else {
+    console.log('authenication token not provided')
+  }
+
   try {
-    const fruits = await db.addFruit(newFruit, user)
+    const fruits = await db.addFruit(newFruit)
     res.json({ fruits })
   } catch (err) {
     res.status(500).send(err.message)
@@ -29,11 +35,17 @@ router.post('/', async (req, res) => {
 })
 
 // PUT /api/v1/fruits
-router.put('/', async (req, res) => {
+router.put('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
-  const user = { id: 1 }
+  // const user = { id: 1 }
+  if (req.user) {
+    console.log('username:', req.user.username)
+  } else {
+    console.log('authenication token not provided')
+  }
+
   try {
-    const fruits = await db.updateFruit(newFruit, user)
+    const fruits = await db.updateFruit(newFruit)
     res.json({ fruits })
   } catch (err) {
     if (err.message === 'Unauthorized') {
@@ -46,11 +58,17 @@ router.put('/', async (req, res) => {
 })
 
 // DELETE /api/v1/fruits
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', getTokenDecoder(), async (req, res) => {
   const id = Number(req.params.id)
-  const user = { id: 1 }
+  // const user = { id: 1 }
+  if (req.user) {
+    console.log('username:', req.user.username)
+  } else {
+    console.log('authenication token not provided')
+  }
+
   try {
-    const fruits = await db.deleteFruit(id, user)
+    const fruits = await db.deleteFruit(id)
     res.json({ fruits })
   } catch (err) {
     if (err.message === 'Unauthorized') {
