@@ -5,6 +5,8 @@ import AddFruit from './AddFruit'
 import { Error } from './Styled'
 
 import { getFruits } from '../api'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+
 
 function Fruits () {
   const [error, setError] = useState('')
@@ -58,7 +60,7 @@ function Fruits () {
           </li>
         ))}
       </ul>
-
+      <IfAuthenticated>
       {adding ? (
         <AddFruit
           setError={setError}
@@ -77,6 +79,7 @@ function Fruits () {
         setError={setError}
         setFruits={setFruits}
       />}
+      </IfAuthenticated>
     </>
   )
 }
