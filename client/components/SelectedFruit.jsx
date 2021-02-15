@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
 import { updateFruit, deleteFruit } from '../api'
+import { IfAuthenticated } from './Authenticated'
 
 function SelectedFruit ({ selected, clearSelected, setError, setFruits }) {
   const [editing, setEditing] = useState(selected)
@@ -56,16 +57,17 @@ function SelectedFruit ({ selected, clearSelected, setError, setFruits }) {
           data-testid='selected-calories'
           value={editingCalories || ''}
           onChange={handleEditChange} />
-
-        <Button type='button'
-          data-testid='update-button'
-          onClick={handleUpdate}>Update fruit</Button>
-        <Button type='button'
-          data-testid='delete-button'
-          onClick={handleDelete}>Delete fruit</Button>
-        <Button type='button'
-          data-testid='clear-button'
-          onClick={clearSelected}>Clear selection</Button>
+        <IfAuthenticated>
+          <Button type='button'
+            data-testid='update-button'
+            onClick={handleUpdate}>Update fruit</Button>
+          <Button type='button'
+            data-testid='delete-button'
+            onClick={handleDelete}>Delete fruit</Button>
+          <Button type='button'
+            data-testid='clear-button'
+            onClick={clearSelected}>Clear selection</Button>
+        </IfAuthenticated>  
       </GridForm>
     </>
   )

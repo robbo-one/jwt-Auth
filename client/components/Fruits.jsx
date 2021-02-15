@@ -6,6 +6,8 @@ import { Error } from './Styled'
 
 import { getFruits } from '../api'
 
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+
 function Fruits () {
   const [error, setError] = useState('')
   const [fruits, setFruits] = useState([])
@@ -58,18 +60,19 @@ function Fruits () {
           </li>
         ))}
       </ul>
-
-      {adding ? (
-        <AddFruit
-          setError={setError}
-          setFruits={setFruits}
-          closeAddForm={closeAddForm}
-        />
-      ) : (
-        <a href='#' onClick={openAddForm}>
-          Add a Fruit
-        </a>
-      )}
+      <IfAuthenticated>    
+        {adding ? (
+          <AddFruit
+            setError={setError}
+            setFruits={setFruits}
+            closeAddForm={closeAddForm}
+          />
+        ) : (
+          <a href='#' onClick={openAddForm}>
+            Add a Fruit
+          </a>
+        )}
+      </IfAuthenticated>
 
       {selected && <SelectedFruit
         selected={selected}
