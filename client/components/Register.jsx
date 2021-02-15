@@ -17,7 +17,6 @@ function Register (props) {
     })
   }
 
-  
   function handleClick (e) {
     e.preventDefault()
     const { username, password } = form
