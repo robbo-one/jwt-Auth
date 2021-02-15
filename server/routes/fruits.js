@@ -68,7 +68,7 @@ router.delete('/:id', getTokenDecoder(), async (req, res) => {
   }
 
   try {
-    const fruits = await db.deleteFruit(id)
+    const fruits = await db.deleteFruit(id, user)
     res.json({ fruits })
   } catch (err) {
     if (err.message === 'Unauthorized') {
