@@ -31,12 +31,10 @@ function createUser (user, db = connection) {
         return Promise.reject(new Error('user exists'))
       }
     })
-    .then(() => {
-      generateHash(user.password)
-    })
-    .then((passwordHash) => {
+    .then(() => generateHash(user.password))
+    .then(passwordHash => {
+      // console.log(passwordHash)
       return db('users')
       .insert({username: user.username, hash: passwordHash})
     })
-
 }

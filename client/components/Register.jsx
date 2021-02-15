@@ -21,7 +21,6 @@ function Register (props) {
 
   function handleClick (evt) {
     evt.preventDefault()
-    console.log(baseUrl)
     const { username, password } = form
     register({username, password}, {baseUrl})
       .then(() => {
