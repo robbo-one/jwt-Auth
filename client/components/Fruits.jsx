@@ -5,32 +5,34 @@ import AddFruit from './AddFruit'
 import { Error } from './Styled'
 
 import { getFruits } from '../api'
+import { IfAuthenticated } from './Authenticated'
 
-function Fruits () {
+
+function Fruits() {
   const [error, setError] = useState('')
   const [fruits, setFruits] = useState([])
   const [adding, setAdding] = useState(false)
   const [selected, setSelected] = useState(null)
 
-  function hideError () {
+  function hideError() {
     setError('')
   }
 
-  function openAddForm (e) {
+  function openAddForm(e) {
     e.preventDefault()
     setAdding(true)
   }
 
-  function closeAddForm () {
+  function closeAddForm() {
     setAdding(false)
   }
 
-  function setSelectHandler (fruit, e) {
+  function setSelectHandler(fruit, e) {
     e.preventDefault()
     setSelected(fruit)
   }
 
-  function clearSelected () {
+  function clearSelected() {
     setSelected(null)
   }
 
@@ -43,7 +45,7 @@ function Fruits () {
   return (
     <>
       <Error onClick={hideError}>
-        { error && `Error: ${error}` }
+        {error && `Error: ${error}`}
       </Error>
 
       <ul>
@@ -58,25 +60,27 @@ function Fruits () {
           </li>
         ))}
       </ul>
+      <IfAuthenticated>
+        {adding ? (
+          <AddFruit
+            setError={setError}
+            setFruits={setFruits}
+            closeAddForm={closeAddForm}
+          />
+        ) : (
+            <a href='#' onClick={openAddForm}>
+              Add a Fruit
+            </a>
+          )}
 
-      {adding ? (
-        <AddFruit
+        {selected && <SelectedFruit
+          selected={selected}
+          clearSelected={clearSelected}
           setError={setError}
           setFruits={setFruits}
-          closeAddForm={closeAddForm}
-        />
-      ) : (
-        <a href='#' onClick={openAddForm}>
-          Add a Fruit
-        </a>
-      )}
+        />}
+      </IfAuthenticated>
 
-      {selected && <SelectedFruit
-        selected={selected}
-        clearSelected={clearSelected}
-        setError={setError}
-        setFruits={setFruits}
-      />}
     </>
   )
 }
