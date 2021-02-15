@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
@@ -57,15 +58,27 @@ function SelectedFruit ({ selected, clearSelected, setError, setFruits }) {
           value={editingCalories || ''}
           onChange={handleEditChange} />
 
+        <IfAuthenticated>
+
         <Button type='button'
           data-testid='update-button'
           onClick={handleUpdate}>Update fruit</Button>
+       
         <Button type='button'
           data-testid='delete-button'
           onClick={handleDelete}>Delete fruit</Button>
+       
         <Button type='button'
           data-testid='clear-button'
           onClick={clearSelected}>Clear selection</Button>
+        </IfAuthenticated>   
+        
+        <IfNotAuthenticated> 
+          <>
+          </>
+        </IfNotAuthenticated>
+
+
       </GridForm>
     </>
   )

@@ -26,7 +26,7 @@ function Nav () {
           <NavLink to='/signin'>Sign in</NavLink>
         </IfNotAuthenticated>
       </NavGroup>
-      <h1>Fruit FTW!</h1>
+      <h1>Biggest Boi Fruits!</h1>
     </>
   )
 }
