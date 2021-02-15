@@ -19,6 +19,7 @@ router.get('/', async (req, res) => {
 // POST /api/v1/fruits
 router.post('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
+  const user = req.user
   if (req.user) {
     console.log('username:', req.user.username)
   } else {
@@ -35,6 +36,7 @@ router.post('/', getTokenDecoder(), async (req, res) => {
 // PUT /api/v1/fruits
 router.put('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
+  const user = req.user
   if (req.user) {
     console.log('username:', req.user.username)
   } else {
@@ -56,6 +58,7 @@ router.put('/', getTokenDecoder(), async (req, res) => {
 // DELETE /api/v1/fruits
 router.delete('/:id', getTokenDecoder(), async (req, res) => {
   const id = Number(req.params.id)
+  const user = req.user
   if (req.user) {
     console.log('username:', req.user.username)
   } else {
