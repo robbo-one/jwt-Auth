@@ -1,5 +1,5 @@
 const environments = {
-  development: 'http://localhost:3000/api/v1/auth',
+  development: 'http://localhost:3000/api/v1',
   test: 'http://localhost:3333/api/v1/auth',
   production: '',
   integration: '',

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+
 
 import SelectedFruit from './SelectedFruit'
 import AddFruit from './AddFruit'
@@ -58,7 +60,7 @@ function Fruits () {
           </li>
         ))}
       </ul>
-
+      <IfAuthenticated>
       {adding ? (
         <AddFruit
           setError={setError}
@@ -70,7 +72,7 @@ function Fruits () {
           Add a Fruit
         </a>
       )}
-
+</IfAuthenticated>
       {selected && <SelectedFruit
         selected={selected}
         clearSelected={clearSelected}
