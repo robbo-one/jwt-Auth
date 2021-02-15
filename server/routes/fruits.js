@@ -1,4 +1,5 @@
 const express = require('express')
+const { getTokenDecoder } = require('authenticare/server')
 
 const db = require('../db/fruits')
 
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
 })
 
 // POST /api/v1/fruits
-router.post('/', async (req, res) => {
+router.post('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
   const user = { id: 1 }
   try {
@@ -29,9 +30,9 @@ router.post('/', async (req, res) => {
 })
 
 // PUT /api/v1/fruits
-router.put('/', async (req, res) => {
+router.put('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
-  const user = { id: 1 }
+  const user = req.user
   try {
     const fruits = await db.updateFruit(newFruit, user)
     res.json({ fruits })
@@ -46,9 +47,9 @@ router.put('/', async (req, res) => {
 })
 
 // DELETE /api/v1/fruits
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', getTokenDecoder(), async (req, res) => {
   const id = Number(req.params.id)
-  const user = { id: 1 }
+  const user = req.user
   try {
     const fruits = await db.deleteFruit(id, user)
     res.json({ fruits })

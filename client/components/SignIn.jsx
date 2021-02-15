@@ -19,10 +19,12 @@ function SignIn (props) {
   }
 
   function handleClick (e) {
+    console.log('click handler')
     e.preventDefault()
     const { username, password } = form
-    signIn({ username, password}, baseUrl )
+    signIn({ username, password}, { baseUrl: baseUrl } )
       .then(() => {
+        console.log("authenticated")
         if(isAuthenticated()) {
           props.history.push('/')
         }
