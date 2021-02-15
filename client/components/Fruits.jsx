@@ -5,6 +5,7 @@ import AddFruit from './AddFruit'
 import { Error } from './Styled'
 
 import { getFruits } from '../api'
+import { IfAuthenticated } from './Authenticated'
 
 function Fruits () {
   const [error, setError] = useState('')
@@ -42,10 +43,11 @@ function Fruits () {
 
   return (
     <>
+    <IfAuthenticated>
       <Error onClick={hideError}>
         { error && `Error: ${error}` }
       </Error>
-
+      
       <ul>
         {fruits.map(fruit => (
           <li key={fruit.id}>
@@ -58,7 +60,7 @@ function Fruits () {
           </li>
         ))}
       </ul>
-
+      
       {adding ? (
         <AddFruit
           setError={setError}
@@ -70,13 +72,14 @@ function Fruits () {
           Add a Fruit
         </a>
       )}
-
+      
       {selected && <SelectedFruit
         selected={selected}
         clearSelected={clearSelected}
         setError={setError}
         setFruits={setFruits}
       />}
+      </IfAuthenticated>
     </>
   )
 }
