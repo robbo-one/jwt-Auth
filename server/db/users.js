@@ -1,4 +1,5 @@
 const connection = require('./connection')
+const { generateHash } = require('authenticare/server')
 
 module.exports = {
   userExists,
@@ -23,5 +24,14 @@ function getUserByName (username, db = connection) {
 }
 
 function createUser (user, db = connection) {
-  // you'll need to write this one
+  return userExists(user.username, db)
+    .then(exists => {
+      if (exists) {
+        return Promise.reject(new Error('User exists'))
+      }
+    })
+    .then(() => generateHash(user.password))
+    .then(passwordHash => {
+      return db('users').insert({ username: user.username, hash: passwordHash })
+    })
 }
