@@ -24,15 +24,14 @@ function getUserByName (username, db = connection) {
 }
 
 function createUser (user, db = connection) {
-  const { username, password } = user
-  return userExists(username, db)
+  return userExists(user.username, db)
     .then(exists => {
       if (exists) {
         return Promise.reject(new Error('User exists'))
       }
     })
-    .then(() => generateHash(password))
+    .then(() => generateHash(user.password))
     .then(passwordHash => {
-      return db('users').insert({ username, hash: passwordHash })
+      return db('users').insert({ username: user.username, hash: passwordHash })
     })
 }

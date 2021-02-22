@@ -9,7 +9,7 @@ const server = express()
 server.use(express.json())
 server.use(express.static(path.join(__dirname, 'public')))
 
-server.use('/api/v1/auth', authRoutes)
+server.use('/api/v1', authRoutes)
 server.use('/api/v1/fruits', fruitRoutes)
 
 server.get('*', (req, res) => {
