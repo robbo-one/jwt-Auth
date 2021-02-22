@@ -17,7 +17,15 @@ function SignIn (props) {
     })
   }
 
-  function handleClick () {
+  function handleClick (e) {
+    e.preventDefault()
+    const { username, password } = form
+    signIn({ username, password })
+      .then(() => {
+        if (isAuthenticated()) {
+          props.history.push('/')
+        }
+      })
   }
 
   return (
