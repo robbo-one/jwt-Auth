@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { logOff } from 'authenticare/client'
 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
@@ -16,9 +17,9 @@ function Nav () {
   return (
     <>
       <NavGroup>
-        <NavLink to='/'>Home</NavLink>
+        <NavLink  to='/'>Home</NavLink>
         <IfAuthenticated>
-          <NavLink to='#'>Log off</NavLink>
+          <NavLink onClick={logOff} to='#'>Log off</NavLink>
         </IfAuthenticated>
         <IfNotAuthenticated>
           <NavLink to='/register'>Register</NavLink>

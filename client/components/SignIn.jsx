@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-
-import { baseApiUrl as baseUrl } from '../config'
+import { signIn, isAuthenticated } from 'authenticare/client'
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
 function SignIn (props) {
